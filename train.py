@@ -19,12 +19,6 @@ def train(data_yaml: str, epochs: int, imgsz: int, model_size: str, run_name: st
         patience=20,        # stop early if validation loss stalls
         name=run_name,
         project="runs/ball_detector",
-        # Small/fast object tips:
-        # - keep imgsz reasonably high (960+) since the ball is tiny;
-        #   don't shrink images too aggressively during training.
-        # - mosaic augmentation (on by default) helps with limited data,
-        #   but can be too aggressive for a single small object -- turn
-        #   off if training looks unstable: mosaic=0.0
     )
 
     print(f"\nTraining complete. Best weights saved to: {results.save_dir}/weights/best.pt")
