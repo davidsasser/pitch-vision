@@ -6,11 +6,9 @@ Detects and tracks a baseball through its flight path from broadcast pitch foota
 
 This project takes broadcast pitch clips and outputs an annotated video showing the ball's detected position and tracked trajectory frame-by-frame, with an estimated speed/arc overlay. It was built to explore small, fast-moving object detection — a genuinely hard case in computer vision compared to detecting larger, slower objects.
 
-## Motivation
-
-
 ## Demo
 
+![demo](pitchVisionDemo.gif)
 
 ## How It Works
 
@@ -49,12 +47,12 @@ pitcharc/
 │   ├── frames/              # extracted video frames
 │   └── selected_frames/     # curated subset chosen for labeling
 ├── scripts/
-│   ├── download_clips.py        # pull pitch clips from Baseball Savant
-│   ├── extract_frames.py        # video -> frame images
-│   ├── select_frames_for_labeling.py  # stratified frame sampling
-│   ├── train_ball_detector.py   # YOLO fine-tuning
-│   ├── visualize_predictions.py # GT vs. predicted box comparison
-│   └── track_video.py           # detection + Kalman tracking on video
+│   ├── getVideos.py        # pull pitch clips from Baseball Savant
+│   ├── extractFrames.py        # video -> frame images
+│   ├── selectForLabeling.py  # stratified frame sampling
+│   ├── train.py                # YOLO fine-tuning
+│   ├── viewPredictions.py      # GT vs. predicted box comparison
+│   └── trackVideo.py           # detection + Kalman tracking on video
 ├── runs/                    # training outputs, weights, metrics
 └── README.md
 ```
@@ -71,25 +69,25 @@ pip install -r requirements.txt
 
 **1. Download pitch clips**
 ```bash
-python scripts/download_clips.py --play-ids-csv path/to/statcast_export.csv
+python scripts/getVideos.py --play-ids-csv path/to/statcast_export.csv
 ```
 
 **2. Extract and select frames for labeling**
 ```bash
-python scripts/extract_frames.py ...
-python scripts/select_frames_for_labeling.py data/frames data/selected_frames --per-video 8
+python scripts/extractFrames.py ...
+python scripts/selectForLabeling.py data/frames data/selected_frames --per-video 8
 ```
 
 **3. Label in Roboflow, export in YOLO format**
 
 **4. Train the detector**
 ```bash
-python scripts/train_ball_detector.py path/to/data.yaml --model-size s
+python scripts/train.py path/to/data.yaml --model-size s
 ```
 
 **5. Run tracking on a new video**
 ```bash
-python scripts/track_video.py path/to/clip.mp4 --weights runs/ball_detector/ball_v1/weights/best.pt
+python scripts/trackVideo.py path/to/clip.mp4 --weights runs/ball_detector/ball_v1/weights/best.pt
 ```
 
 ## Challenges & Learnings
