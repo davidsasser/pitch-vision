@@ -1,3 +1,5 @@
 /data/
 /runs/
+/prediction_review/
+*.pt
 *.html
