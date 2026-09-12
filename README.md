@@ -4,7 +4,7 @@ Detects and tracks a baseball through its flight path from broadcast pitch foota
 
 ## Overview
 
-This project takes broadcast pitch clips and outputs an annotated video showing the ball's detected position and tracked trajectory frame-by-frame, with an estimated speed/arc overlay. It was built to explore small, fast-moving object detection — a genuinely hard case in computer vision compared to detecting larger, slower objects.
+This project takes broadcast pitch clips and outputs an annotated video showing the ball's detected position and tracked trajectory frame-by-frame, with an estimated speed/arc overlay. It was built to explore small, fast-moving object detection, a genuinely hard case in computer vision compared to detecting larger, slower objects.
 
 ## Demo
 
